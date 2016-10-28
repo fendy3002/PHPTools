@@ -20,38 +20,6 @@
                     "psr-4": {"QzPhp\\": "src/QzPhp"}
                 }
             }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "coco/foundation",
-                "version": "0.3.3",
-                "source": {
-                    "url": "ssh://git@git.coderscolony.co:2268/Libraries/LaravelFoundation.git",
-                    "type": "git",
-                    "reference": "master"
-                },
-                "autoload": {
-                    "psr-4": {
-                        "Coco\\": "src/Coco"
-                    }
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "map/core",
-                "version": "0.1.4",
-                "source": {
-                    "url": "ssh://git@git.coderscolony.co:2268/HotelMapper/core.git",
-                    "type": "git",
-                    "reference": "master"
-                },
-                "autoload": {
-                    "psr-4": {"MapCore\\": "src/MapCore"}
-                }
-            }
         }
     ],
 
@@ -59,10 +27,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "qz/qzphp": "0.1.10",
-        "coco/foundation": "0.3.3",
-        "map/core": "0.1.4",
         "predis/predis" : "~1.0",
-        "maatwebsite/excel": "~2.0.0",
+        "maatwebsite/excel": "~2.1",
         "alexpechkarev/google-maps": "dev-master"
     },
     "require-dev": {

@@ -12,7 +12,9 @@
 */
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'HomeController@index');
+    Route::get('/import', 'ImportController@getIndex');
+    Route::post('/import', 'ImportController@postIndex');
 });
 Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
-    
+
 });
