@@ -1,0 +1,7 @@
+*
+!public/
+
+public/*
+!public/img_generate/
+
+!.gitignore

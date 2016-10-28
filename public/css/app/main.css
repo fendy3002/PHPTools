@@ -1,0 +1,30 @@
+.ratinginfo{
+    width:50px;
+    padding:6px;
+    margin-right:8px;
+}
+.ratinginfo .ratinglabel{
+    margin-top:50%;
+    font-size:0.8em;
+    font-weight: bold;
+}
+
+.box-middle{
+
+}
+.box-middle:before{
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em; /* Adjusts for spacing */
+
+    /* For visualization
+    background: #808080; width: 5px;
+    */
+}
+
+.box-middle .centered{
+    display: inline-block;
+    vertical-align: middle;
+}

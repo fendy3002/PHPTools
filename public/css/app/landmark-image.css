@@ -1,0 +1,15 @@
+div.lm_image{
+
+}
+div.lm_image div.lm_image_content{
+    border: 1px #DDDDDD solid;
+    background-color: white;
+}
+div.lm_image .lm_image_content img{
+    max-height: 200px;
+    max-width: 300px;
+}
+div.lm_image div.lm_image_content:hover{
+    opacity: .5;
+    cursor:pointer;
+}
