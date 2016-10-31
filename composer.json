@@ -29,6 +29,7 @@
         "qz/qzphp": "0.1.10",
         "predis/predis" : "~1.0",
         "maatwebsite/excel": "~2.1",
+        "phpoffice/phpexcel": "~1.8",
         "alexpechkarev/google-maps": "dev-master"
     },
     "require-dev": {

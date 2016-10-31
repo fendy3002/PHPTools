@@ -19,5 +19,18 @@
                 </form>
             </div>
         </div>
+        <?php if(!empty($results) && count($results) > 0){
+        ?>
+            <div class="box box-solid">
+                <div class="box-body">
+                    <ul>
+                        <?php foreach($results as $each){ ?>
+                            <li>{{$each}}</li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+        <?php } ?>
+
     </section>
 @overwrite
