@@ -84,4 +84,15 @@ class ImportController extends Controller
         $with = ['', '', '', '', '', '', ''];
         return str_replace($from, $with, $name);
     }
+
+    public function clearTmp(){
+        $query = "SET @tables = NULL;
+            SELECT GROUP_CONCAT(table_schema, '.', table_name) INTO @tables FROM information_schema.tables
+              WHERE table_schema = 'tmp_db' AND table_name not in ('lv_failed_jobs','lv_migrations','lv_queue_jobs');
+
+            SET @tables = CONCAT('DROP TABLE ', @tables);
+            PREPARE stmt1 FROM @tables;
+            EXECUTE stmt1;
+            DEALLOCATE PREPARE stmt1;";
+    }
 }
