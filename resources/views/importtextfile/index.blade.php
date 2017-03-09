@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            <b>IMPORT</b>
+            <b>IMPORT TEXT FILE</b>
         </h1>
     </section>
 
@@ -15,6 +15,10 @@
                     <div class="form-group">
                         <label class="control-label">File</label>
                         <input type="file" name="data"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Delimiter</label>
+                        <input class="form-control" name="delimiter" />
                     </div>
                     <div class="form-group">
                         <label class="control-label">Struct</label>
