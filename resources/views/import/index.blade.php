@@ -12,8 +12,15 @@
         <div class="box">
             <div class="box-body">
                 <form method="post" enctype="multipart/form-data">
-                    <input type="file" name="data"/>
-                    <button class="btn btn-primary">Submit</button>
+                    <div class="form-group">
+                        <input type="file" name="data"/>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" rows=20 name="struct"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">Submit</button>
+                    </div>
 
                     {!! csrf_field() !!}
                 </form>

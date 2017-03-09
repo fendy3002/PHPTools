@@ -21,10 +21,31 @@ class ImportController extends Controller
         $movePath = storage_path('app/public/');
         $uploaded->move($movePath, $uuid);
 
+        $struct = \Request::input('struct');
+        $arrStruct = NULL;
+
+        $filename = \Request::file('data')->getClientOriginalName();
+        $importRequest = [
+            "uuid" => $uuid,
+            "file_name" => $filename,
+            "schema" => $struct,
+            "utc_created" => gmdate("c")
+        ];
+        $db = \DB::connection('');
+        $db->table("import_request")->insert($importRequest);
+
+        if(!empty($struct)){
+            $convertedStruct = (array)json_decode($struct);
+            $arrStruct = [];
+            foreach($convertedStruct as $key => $value){
+                $arrStruct[$this->formatName($key)] = $value;
+            }
+        }
+
         $moveFile = $movePath . $uuid;
         chmod($moveFile, 0777);
 
-        \Excel::filter('chunk')->load($uploadPath)->chunk(1500, function($sheet) use($uuid, $viewModel) {
+        \Excel::filter('chunk')->load($uploadPath)->chunk(1500, function($sheet) use($uuid, $viewModel, $arrStruct) {
             $dataModel = (object)[
                 'currentRow' => 1,
                 'limit' => 1000,
@@ -49,9 +70,24 @@ class ImportController extends Controller
 
                 if(!$exists){
                     echo $dataModel->tableName . " not exists\n";
-                    $columns = \QzPhp\Q::Z()->enum($sheet->first()->keys()->all())->select(function($k){
-                        return '`' . $this->formatName($k) . '` varchar(1000)';
-                    })->result();
+                    $columns = NULL;
+                    if(!empty($arrStruct)){
+                        $columns = \QzPhp\Q::Z()->enum($sheet->first()->keys()->all())->select(
+                            function($k) use($arrStruct){
+                                $field = 'varchar(1000)';
+                                if(array_key_exists($this->formatName($k), $arrStruct)){
+                                    $field = $arrStruct[$this->formatName($k)];
+                                }
+                                return '`' . $this->formatName($k) . '` ' . $field;
+                            })->result();
+                    }
+                    else{
+                        $columns = \QzPhp\Q::Z()->enum($sheet->first()->keys()->all())->select(
+                            function($k){
+                                return '`' . $this->formatName($k) . '` varchar(1000)';
+                            })->result();
+                    }
+                    
                     $column = implode(', ', $columns);
 
                     $query = "create table " . $dataModel->tableName . ' ('. $column .')';
@@ -82,7 +118,8 @@ class ImportController extends Controller
     private function formatName($name){
         $from = ['.', ' ', '-', '!', '@', '#', '$'];
         $with = ['', '', '', '', '', '', ''];
-        return str_replace($from, $with, $name);
+        $result = str_replace($from, $with, $name);
+        return strtolower($name);
     }
 
     public function clearTmp(){

@@ -30,7 +30,8 @@
         "predis/predis" : "~1.0",
         "maatwebsite/excel": "~2.1",
         "phpoffice/phpexcel": "~1.8",
-        "alexpechkarev/google-maps": "dev-master"
+        "alexpechkarev/google-maps": "dev-master",
+        "nayjest/str-case-converter": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
