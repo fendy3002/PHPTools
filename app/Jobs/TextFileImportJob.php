@@ -37,9 +37,7 @@ class TextFileImportJob extends Job implements ShouldQueue
         $columns = $this->data['columns'];
         $delimiter = $this->data['delimiter'];
         $tableName = '_' . $uuid;
-        $eachLoop = 100;
-
-        \Log::debug($this->data);
+        $eachLoop = 1000;
 
         $db = \DB::connection("");
 
