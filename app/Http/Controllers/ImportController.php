@@ -74,6 +74,7 @@ class ImportController extends Controller
                     if(!empty($arrStruct)){
                         $columns = \QzPhp\Q::Z()->enum($sheet->first()->keys()->all())->select(
                             function($k) use($arrStruct){
+                                if(empty($k) || $k == ''){ return ''; }
                                 $field = 'varchar(1000)';
                                 if(array_key_exists($this->formatName($k), $arrStruct)){
                                     $field = $arrStruct[$this->formatName($k)];
@@ -84,6 +85,7 @@ class ImportController extends Controller
                     else{
                         $columns = \QzPhp\Q::Z()->enum($sheet->first()->keys()->all())->select(
                             function($k){
+                                if(empty($k) || $k == ''){ return ''; }
                                 return '`' . $this->formatName($k) . '` varchar(1000)';
                             })->result();
                     }
@@ -98,7 +100,12 @@ class ImportController extends Controller
                 }
 
                 $sheet->each(function($row) use($dataModel){
-                    $dataModel->buffer[] = $row->toArray();
+                    $buffer = array_filter($row->toArray(), function($value) {
+                        return !is_null($value) && $value !== '';
+                    }, ARRAY_FILTER_USE_KEY);
+                    if(count($buffer) == 0){ continue; }
+
+                    $dataModel->buffer[] = $buffer;
                 });
 
                 $db->table($dataModel->tableName)->insert($dataModel->buffer);
