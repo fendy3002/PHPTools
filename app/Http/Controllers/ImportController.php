@@ -103,7 +103,7 @@ class ImportController extends Controller
                     $buffer = array_filter($row->toArray(), function($value) {
                         return !is_null($value) && $value !== '';
                     }, ARRAY_FILTER_USE_KEY);
-                    if(count($buffer) == 0){ continue; }
+                    if(count($buffer) == 0){ return; }
 
                     $dataModel->buffer[] = $buffer;
                 });
