@@ -51,7 +51,6 @@ class ImportJsonController extends Controller
             $isFirst = false;
         }
         $createStatement = "create table `$tableName` ($columnDefinition);";
-        echo $createStatement;
         $db->statement($createStatement);
 
         $moveFile = $movePath . $uuid;
@@ -71,7 +70,6 @@ class ImportJsonController extends Controller
                 $jsonArr
             );
             if(count($toInsert) % 1000 == 0){
-                print_r($toInsert);
                 $db->table($tableName)->insert($toInsert);
                 $toInsert = [];
             }
