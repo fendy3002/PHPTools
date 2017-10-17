@@ -16,6 +16,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/import', 'ImportController@postIndex');
     Route::get('/importtextfile', 'ImportTextFileController@getIndex');
     Route::post('/importtextfile', 'ImportTextFileController@postIndex');
+    
+    Route::get('/importjson', 'ImportJsonController@getIndex');
+    Route::post('/importjson', 'ImportJsonController@postIndex');
     Route::get('/jsontotable', 'JsonToTableController@getIndex');
     Route::post('/jsontotable', 'JsonToTableController@postIndex');
 });
